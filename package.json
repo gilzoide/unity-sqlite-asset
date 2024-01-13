@@ -10,5 +10,6 @@
   },
   "dependencies": {
     "com.gilzoide.sqlite-net": "1.0.0-preview3"
-  }
+  },
+  "unity": "2018.1"
 }
