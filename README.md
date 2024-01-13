@@ -8,8 +8,9 @@ Provides a ScriptedImporter for SQLite database assets with the ".db" extension.
 - [SqliteAsset](Runtime/SqliteAsset.cs): read-only SQLite database Unity assets.
   + Files with the ".db" extension will be loaded as `SqliteAsset`s.
   + Use the `CreateConnection()` method for connecting to the database provided by the asset.
-    Make sure do `Dispose()` of any connections you create.
+    Make sure to `Dispose()` of any connections you create.
 - [SQLiteConnectionMemory](Runtime/SQLiteConnectionMemory.cs): custom `SQLiteConnection` subclass that loads a SQLite database from memory (`byte[]`) instead of from file path.
+- Supported platforms: Windows, macOS, iOS, tvOS, visionOS, Android and WebGL
 
 
 ## Dependencies
