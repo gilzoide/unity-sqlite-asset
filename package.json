@@ -1,0 +1,14 @@
+{
+  "name": "com.gilzoide.sqlite-asset",
+  "displayName": "SQLite Asset",
+  "version": "1.0.0-preview1",
+  "description": "SQLite read-only database assets for Unity. Provides a ScriptedImporter for .db SQLite database assets.",
+  "homepage": "https://github.com/gilzoide/unity-sqlite-asset",
+  "license": "MIT",
+  "author": {
+    "name": "Gil Barbosa Reis"
+  },
+  "dependencies": {
+    "com.gilzoide.sqlite-net": "1.0.0"
+  }
+}
