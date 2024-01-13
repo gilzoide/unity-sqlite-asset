@@ -10,7 +10,7 @@ namespace Gilzoide.SqliteNet
 #if UNITY_WEBGL && !UNITY_EDITOR
         public const string MemVfsLibraryPath = "__Internal";
 #else
-        public const string MemVfsLibraryPath = "sqlite3memvfs";
+        public const string MemVfsLibraryPath = "gilzoide-sqlite-asset";
 #endif
 
         [DllImport(SQLite3.LibraryPath)]
@@ -24,6 +24,9 @@ namespace Gilzoide.SqliteNet
 
         static SQLiteConnectionMemory()
         {
+            // Workaround to init "memvfs" extension using automatic extensions.
+            // This way we can rely on "DllImport" finding the right library
+            // instead of specifying relative paths for each platform.
             IntPtr memVfsEntrypoint = sqlite3_memvfs_get_init();
             SQLite3.Result result = sqlite3_auto_extension(memVfsEntrypoint);
             if (result != SQLite3.Result.OK)
