@@ -1,0 +1,16 @@
+{
+    "name": "Gilzoide.SqliteAsset",
+    "rootNamespace": "Gilzoide.SqliteAsset",
+    "references": [
+        "Gilzoide.SqliteNet"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
