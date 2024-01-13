@@ -16,18 +16,26 @@ namespace Gilzoide.SqliteNet
         [DllImport(SQLite3.LibraryPath)]
         private static extern SQLite3.Result sqlite3_auto_extension(IntPtr extensionFun);
 
+        [DllImport(SQLite3.LibraryPath)]
+        private static extern int sqlite3_cancel_auto_extension(IntPtr extensionFun);
+
         [DllImport(MemVfsLibraryPath)]
         private static extern IntPtr sqlite3_memvfs_get_init();
 
         static SQLiteConnectionMemory()
         {
-            SQLite3.Result result = sqlite3_auto_extension(sqlite3_memvfs_get_init());
-            UnityEngine.Debug.Log(result);
+            IntPtr memVfsEntrypoint = sqlite3_memvfs_get_init();
+            SQLite3.Result result = sqlite3_auto_extension(memVfsEntrypoint);
             if (result != SQLite3.Result.OK)
             {
-                throw SQLiteException.New(result, SQLite3.GetErrmsg(IntPtr.Zero));
+                throw SQLiteException.New(result, $"Error registering \"memvfs\" autoinit: {result}");
             }
+            // Load "memvfs" using auto extension initialization
             new SQLiteConnection(":memory:").Dispose();
+            if (sqlite3_cancel_auto_extension(memVfsEntrypoint) == 0)
+            {
+                throw SQLiteException.New(result, "Error unregistering \"memvfs\" autoinit");
+            }
         }
 
         private ulong _memoryGcHandle;
