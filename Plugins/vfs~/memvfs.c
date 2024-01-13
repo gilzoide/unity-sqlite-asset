@@ -573,3 +573,7 @@ int sqlite3_memvfs_init(
   if( rc==SQLITE_OK ) rc = SQLITE_OK_LOAD_PERMANENTLY;
   return rc;
 }
+
+void *sqlite3_memvfs_get_init() {
+  return &sqlite3_memvfs_init;
+}

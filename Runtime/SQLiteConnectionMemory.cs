@@ -1,30 +1,36 @@
 using System;
 using System.Runtime.InteropServices;
 using SQLite;
+using Unity.Collections.LowLevel.Unsafe;
 
 namespace Gilzoide.SqliteNet
 {
-    public class SQLiteConnectionMemory : SQLiteConnection
+    public unsafe class SQLiteConnectionMemory : SQLiteConnection
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
-        public const string LibraryPath = "__Internal";
+        public const string MemVfsLibraryPath = "__Internal";
 #else
-        public const string LibraryPath = "sqlite3memvfs";
+        public const string MemVfsLibraryPath = "sqlite3memvfs";
 #endif
 
-        [DllImport(LibraryPath, EntryPoint = "sqlite3_memvfs_init", CallingConvention = CallingConvention.Cdecl)]
-        private static extern SQLite3.Result sqlite3_memvfs_init(IntPtr _, out IntPtr errorMessage, IntPtr sqliteApi);
+        [DllImport(SQLite3.LibraryPath)]
+        private static extern SQLite3.Result sqlite3_auto_extension(IntPtr extensionFun);
+
+        [DllImport(MemVfsLibraryPath)]
+        private static extern IntPtr sqlite3_memvfs_get_init();
 
         static SQLiteConnectionMemory()
         {
-            SQLite3.Result result = sqlite3_memvfs_init(IntPtr.Zero, out _, IntPtr.Zero);
+            SQLite3.Result result = sqlite3_auto_extension(sqlite3_memvfs_get_init());
+            UnityEngine.Debug.Log(result);
             if (result != SQLite3.Result.OK)
             {
-                throw SQLiteException.New(result, "Failed initializing memvfs");
+                throw SQLiteException.New(result, SQLite3.GetErrmsg(IntPtr.Zero));
             }
+            new SQLiteConnection(":memory:").Dispose();
         }
 
-        private GCHandle _memoryHandle;
+        private ulong _memoryGcHandle;
 
         public SQLiteConnectionMemory(byte[] bytes, bool storeDateTimeAsTicks = true)
             : this(bytes, SQLiteOpenFlags.ReadOnly, storeDateTimeAsTicks)
@@ -37,27 +43,23 @@ namespace Gilzoide.SqliteNet
         }
 
         public SQLiteConnectionMemory(byte[] bytes, int currentSize, SQLiteOpenFlags openFlags, bool storeDateTimeAsTicks = true)
-            : this(GCHandle.Alloc(bytes, GCHandleType.Pinned), currentSize, bytes.Length, openFlags, storeDateTimeAsTicks)
+            : this((IntPtr) UnsafeUtility.PinGCArrayAndGetDataAddress(bytes, out ulong memoryGcHandle), currentSize, bytes.Length, openFlags, storeDateTimeAsTicks)
         {
+            _memoryGcHandle = memoryGcHandle;
         }
 
-        public SQLiteConnectionMemory(GCHandle memoryHandle, int size, int maxSize, SQLiteOpenFlags openFlags, bool storeDateTimeAsTicks = true)
-            : this(memoryHandle.AddrOfPinnedObject(), size, maxSize, openFlags, storeDateTimeAsTicks)
-        {
-            _memoryHandle = memoryHandle;
-        }
-
-        public SQLiteConnectionMemory(IntPtr memory, int size, int maxSize, SQLiteOpenFlags openFlags, bool storeDateTimeAsTicks = true)
-            : base($"file:?ptr=0x{memory:X}&sz={size}&maxsz={maxSize}&vfs=memvfs", openFlags, storeDateTimeAsTicks)
+        private SQLiteConnectionMemory(IntPtr memory, int size, int maxSize, SQLiteOpenFlags openFlags, bool storeDateTimeAsTicks = true)
+            : base(new SQLiteConnectionString($"file:name?ptr=0x{(ulong)memory:X}&sz={size}&max={maxSize}", openFlags, storeDateTimeAsTicks, vfsName: "memvfs"))
         {
         }
 
         public override void Dispose()
         {
             base.Dispose();
-            if (_memoryHandle.IsAllocated)
+            if (_memoryGcHandle != 0)
             {
-                _memoryHandle.Free();
+                UnsafeUtility.ReleaseGCObject(_memoryGcHandle);
+                _memoryGcHandle = 0;
             }
         }
     }
