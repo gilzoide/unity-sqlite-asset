@@ -21,81 +21,81 @@ $(BUILD_DIRS):
 	mkdir -p $@
 
 # Windows
-lib/windows/%/sqlite3memvfs.dll: LINKFLAGS += -shared
-lib/windows/%/sqlite3memvfs.dll: $(MEMVFS_SRC) | lib/windows/%
+lib/windows/%/gilzoide-sqlite-asset.dll: LINKFLAGS += -shared
+lib/windows/%/gilzoide-sqlite-asset.dll: $(MEMVFS_SRC) | lib/windows/%
 	$(CC) -o $@ $^ $(CFLAGS) $(LINKFLAGS)
 
 # Linux
-lib/linux/%/libsqlite3memvfs.so: CFLAGS += -fPIC
-lib/linux/%/libsqlite3memvfs.so: LINKFLAGS += -shared
-lib/linux/%/libsqlite3memvfs.so: $(MEMVFS_SRC) | lib/linux/%
+lib/linux/%/gilzoide-sqlite-asset.so: CFLAGS += -fPIC
+lib/linux/%/gilzoide-sqlite-asset.so: LINKFLAGS += -shared
+lib/linux/%/gilzoide-sqlite-asset.so: $(MEMVFS_SRC) | lib/linux/%
 	$(CC) -o $@ $^ $(CFLAGS) $(LINKFLAGS)
 
 # macOS
-lib/macos/libsqlite3memvfs.dylib: CFLAGS += -arch arm64 -arch x86_64 -isysroot $(shell xcrun --show-sdk-path --sdk macosx)
-lib/macos/libsqlite3memvfs.dylib: LINKFLAGS += -shared
-lib/macos/libsqlite3memvfs.dylib: $(MEMVFS_SRC) | lib/macos
+lib/macos/gilzoide-sqlite-asset.dylib: CFLAGS += -arch arm64 -arch x86_64 -isysroot $(shell xcrun --show-sdk-path --sdk macosx)
+lib/macos/gilzoide-sqlite-asset.dylib: LINKFLAGS += -shared
+lib/macos/gilzoide-sqlite-asset.dylib: $(MEMVFS_SRC) | lib/macos
 	$(CC) -o $@ $^ $(CFLAGS) $(LINKFLAGS)
 
 # iOS
-lib/ios/libsqlite3memvfs.dylib: CFLAGS += -arch arm64 -isysroot $(shell xcrun --show-sdk-path --sdk iphoneos)
-lib/ios/libsqlite3memvfs.dylib: LINKFLAGS += -shared
-lib/ios/libsqlite3memvfs.dylib: $(MEMVFS_SRC) | lib/ios
+lib/ios/gilzoide-sqlite-asset.dylib: CFLAGS += -arch arm64 -isysroot $(shell xcrun --show-sdk-path --sdk iphoneos)
+lib/ios/gilzoide-sqlite-asset.dylib: LINKFLAGS += -shared
+lib/ios/gilzoide-sqlite-asset.dylib: $(MEMVFS_SRC) | lib/ios
 	$(CC) -o $@ $^ $(CFLAGS) $(LINKFLAGS)
 
 # tvOS
-lib/tvos/libsqlite3memvfs.dylib: CFLAGS += -arch arm64 -isysroot $(shell xcrun --show-sdk-path --sdk appletvos)
-lib/tvos/libsqlite3memvfs.dylib: LINKFLAGS += -shared
-lib/tvos/libsqlite3memvfs.dylib: $(MEMVFS_SRC) | lib/tvos
+lib/tvos/gilzoide-sqlite-asset.dylib: CFLAGS += -arch arm64 -isysroot $(shell xcrun --show-sdk-path --sdk appletvos)
+lib/tvos/gilzoide-sqlite-asset.dylib: LINKFLAGS += -shared
+lib/tvos/gilzoide-sqlite-asset.dylib: $(MEMVFS_SRC) | lib/tvos
 	$(CC) -o $@ $^ $(CFLAGS) $(LINKFLAGS)
 
 # visionOS
-lib/visionos/libsqlite3memvfs.dylib: CFLAGS += -arch arm64 -isysroot $(shell xcrun --show-sdk-path --sdk xros)
-lib/visionos/libsqlite3memvfs.dylib: LINKFLAGS += -shared
-lib/visionos/libsqlite3memvfs.dylib: $(MEMVFS_SRC) | lib/visionos
+lib/visionos/gilzoide-sqlite-asset.dylib: CFLAGS += -arch arm64 -isysroot $(shell xcrun --show-sdk-path --sdk xros)
+lib/visionos/gilzoide-sqlite-asset.dylib: LINKFLAGS += -shared
+lib/visionos/gilzoide-sqlite-asset.dylib: $(MEMVFS_SRC) | lib/visionos
 	$(CC) -o $@ $^ $(CFLAGS) $(LINKFLAGS)
 
 # Android
-lib/android/%/libsqlite3memvfs.so: CFLAGS += -fPIC
-lib/android/%/libsqlite3memvfs.so: LINKFLAGS += -shared
-lib/android/%/libsqlite3memvfs.so: $(MEMVFS_SRC) | lib/android/%
+lib/android/%/gilzoide-sqlite-asset.so: CFLAGS += -fPIC
+lib/android/%/gilzoide-sqlite-asset.so: LINKFLAGS += -shared
+lib/android/%/gilzoide-sqlite-asset.so: $(MEMVFS_SRC) | lib/android/%
 	$(CC) -o $@ $^ $(CFLAGS) $(LINKFLAGS)
 
-lib/android/arm64/libsqlite3memvfs.so: CC = $(wildcard $(ANDROID_NDK_ROOT)/toolchains/llvm/prebuilt/*/bin/aarch64-linux-android21-clang)
-lib/android/arm32/libsqlite3memvfs.so: CC = $(wildcard $(ANDROID_NDK_ROOT)/toolchains/llvm/prebuilt/*/bin/armv7a-linux-androideabi19-clang)
-lib/android/x86_64/libsqlite3memvfs.so: CC = $(wildcard $(ANDROID_NDK_ROOT)/toolchains/llvm/prebuilt/*/bin/x86_64-linux-android21-clang)
-lib/android/x86/libsqlite3memvfs.so: CC = $(wildcard $(ANDROID_NDK_ROOT)/toolchains/llvm/prebuilt/*/bin/i686-linux-android19-clang)
+lib/android/arm64/gilzoide-sqlite-asset.so: CC = $(wildcard $(ANDROID_NDK_ROOT)/toolchains/llvm/prebuilt/*/bin/aarch64-linux-android21-clang)
+lib/android/arm32/gilzoide-sqlite-asset.so: CC = $(wildcard $(ANDROID_NDK_ROOT)/toolchains/llvm/prebuilt/*/bin/armv7a-linux-androideabi19-clang)
+lib/android/x86_64/gilzoide-sqlite-asset.so: CC = $(wildcard $(ANDROID_NDK_ROOT)/toolchains/llvm/prebuilt/*/bin/x86_64-linux-android21-clang)
+lib/android/x86/gilzoide-sqlite-asset.so: CC = $(wildcard $(ANDROID_NDK_ROOT)/toolchains/llvm/prebuilt/*/bin/i686-linux-android19-clang)
 
 # WebGL
-lib/webgl/libsqlite3memvfs.bc: $(MEMVFS_SRC) | lib/webgl
+lib/webgl/gilzoide-sqlite-asset.bc: $(MEMVFS_SRC) | lib/webgl
 	$(EMCC) -o $@ $< $(CFLAGS) -c -emit-llvm
 
 
 # Targets
-windows-x86_64: lib/windows/x86_64/sqlite3memvfs.dll
-windows-x86: lib/windows/x86/sqlite3memvfs.dll
+windows-x86_64: lib/windows/x86_64/gilzoide-sqlite-asset.dll
+windows-x86: lib/windows/x86/gilzoide-sqlite-asset.dll
 
 windows-mingw-x86_64: CC = x86_64-w64-mingw32-gcc
 windows-mingw-x86_64: LINKFLAGS += -static-libgcc
-windows-mingw-x86_64: lib/windows/x86_64/sqlite3memvfs.dll
+windows-mingw-x86_64: lib/windows/x86_64/gilzoide-sqlite-asset.dll
 
 windows-mingw-x86: CC = i686-w64-mingw32-gcc
 windows-mingw-x86: LINKFLAGS += -static-libgcc
-windows-mingw-x86: lib/windows/x86/sqlite3memvfs.dll
+windows-mingw-x86: lib/windows/x86/gilzoide-sqlite-asset.dll
 
-linux-x86_64: lib/linux/x86_64/libsqlite3memvfs.so
+linux-x86_64: lib/linux/x86_64/gilzoide-sqlite-asset.so
 
-macos-universal: lib/macos/libsqlite3memvfs.dylib
-ios-universal: lib/ios/libsqlite3memvfs.dylib
-tvos-universal: lib/tvos/libsqlite3memvfs.dylib
-visionos-universal: lib/visionos/libsqlite3memvfs.dylib
+macos-universal: lib/macos/gilzoide-sqlite-asset.dylib
+ios-universal: lib/ios/gilzoide-sqlite-asset.dylib
+tvos-universal: lib/tvos/gilzoide-sqlite-asset.dylib
+visionos-universal: lib/visionos/gilzoide-sqlite-asset.dylib
 
-android-arm64: lib/android/arm64/libsqlite3memvfs.so
-android-arm32: lib/android/arm32/libsqlite3memvfs.so
-android-x86_64: lib/android/x86_64/libsqlite3memvfs.so
-android-x86: lib/android/x86/libsqlite3memvfs.so
+android-arm64: lib/android/arm64/gilzoide-sqlite-asset.so
+android-arm32: lib/android/arm32/gilzoide-sqlite-asset.so
+android-x86_64: lib/android/x86_64/gilzoide-sqlite-asset.so
+android-x86: lib/android/x86/gilzoide-sqlite-asset.so
 
-webgl: lib/webgl/libsqlite3memvfs.bc
+webgl: lib/webgl/gilzoide-sqlite-asset.bc
 
 all-android: android-arm64 android-arm32 android-x86_64 android-x86
 all-apple: macos-universal ios-universal tvos-universal visionos-universal
