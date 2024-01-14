@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using SQLite;
+using UnityEngine;
 
 namespace Gilzoide.SqliteAsset
 {
@@ -71,6 +72,15 @@ namespace Gilzoide.SqliteAsset
             {
                 sqlite3_free(bytes);
             }
+        }
+
+        public static SqliteAsset SerializeToAsset(this SQLiteConnection db, SQLiteOpenFlags openFlags = SQLiteOpenFlags.ReadOnly, bool storeDateTimeAsTicks = true)
+        {
+            var asset = ScriptableObject.CreateInstance<SqliteAsset>();
+            asset.Bytes = db.Serialize();
+            asset.OpenFlags = openFlags;
+            asset.StoreDateTimeAsTicks = storeDateTimeAsTicks;
+            return asset;
         }
     }
 }

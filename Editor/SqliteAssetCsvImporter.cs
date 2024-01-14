@@ -32,19 +32,14 @@ namespace Gilzoide.SqliteAsset.Editor
 
         public override void OnImportAsset(AssetImportContext ctx)
         {
-            byte[] bytes;
+            SqliteAsset asset;
             using (var tempDb = new SQLiteConnection(""))
             using (var file = File.OpenRead(assetPath))
             using (var stream = new StreamReader(file))
             {
                 tempDb.ImportCsvToTable(_tableName, stream, _csvSeparator);
-                bytes = tempDb.Serialize();
+                asset = tempDb.SerializeToAsset(_openFlags, _storeDateTimeAsTicks);
             }
-
-            SqliteAsset asset = ScriptableObject.CreateInstance<SqliteAsset>();
-            asset.Bytes = bytes;
-            asset.OpenFlags = _openFlags;
-            asset.StoreDateTimeAsTicks = _storeDateTimeAsTicks;
             ctx.AddObjectToAsset("sqlite", asset);
             ctx.SetMainObject(asset);
 
