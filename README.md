@@ -1,7 +1,8 @@
 # SQLite Asset
 Read-only [SQLite](https://sqlite.org/) database assets for Unity.
 
-Provides a ScriptedImporter for SQLite database assets with the ".db" extension.
+Automatically imports ".db" files as SQLite database assets.
+Optionally, you can import ".csv" files as SQLite database assets.
 
 
 ## Features
