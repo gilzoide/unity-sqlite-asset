@@ -2,7 +2,7 @@
   "name": "com.gilzoide.sqlite-asset",
   "displayName": "SQLite Asset",
   "version": "1.0.0-preview1",
-  "description": "Read-only SQLite database assets for Unity. Provides a ScriptedImporter for .db SQLite database assets.",
+  "description": "Read-only SQLite database assets for Unity with ScriptedImporters for \".db\" and \".csv\" files.",
   "homepage": "https://github.com/gilzoide/unity-sqlite-asset",
   "license": "MIT",
   "author": {
