@@ -7,18 +7,18 @@ namespace Gilzoide.SqliteAsset
     public class SqliteAsset : ScriptableObject
     {
         [Tooltip("Flags controlling how the SQLite connection should be opened. 'ReadWrite' and 'Create' flags will be ignored, since SQLite assets are read-only.")]
-        [SerializeField] internal SQLiteOpenFlags _openFlags = SQLiteOpenFlags.ReadOnly;
+        [SerializeField] private SQLiteOpenFlags _openFlags = SQLiteOpenFlags.ReadOnly;
 
         [Tooltip("Whether to store DateTime properties as ticks (true) or strings (false).")]
-        [SerializeField] internal bool _storeDateTimeAsTicks = true;
+        [SerializeField] private bool _storeDateTimeAsTicks = true;
 
-        [SerializeField, HideInInspector] internal byte[] _bytes;
+        [SerializeField, HideInInspector] private byte[] _bytes;
 
         /// <summary>
         /// Flags controlling how the SQLite connection should be opened.
         /// </summary>
         /// <remarks>
-        /// 'ReadWrite' flag will be ignored, since SQLite assets are read-only.
+        /// 'ReadWrite' and 'Create' flags will be ignored, since SQLite assets are read-only.
         /// </remarks>
         public SQLiteOpenFlags OpenFlags
         {
@@ -52,12 +52,12 @@ namespace Gilzoide.SqliteAsset
         /// <exception cref="NullReferenceException">If <see cref="Bytes"/> is null.</exception>
         public SQLiteConnection CreateConnection()
         {
-            if (_bytes == null)
+            if (Bytes == null)
             {
                 throw new NullReferenceException(nameof(Bytes));
             }
 
-            return new SQLiteConnectionMemory(_bytes, _openFlags, _storeDateTimeAsTicks);
+            return new SQLiteConnectionMemory(Bytes, OpenFlags, StoreDateTimeAsTicks);
         }
 
 #if UNITY_EDITOR
@@ -65,12 +65,12 @@ namespace Gilzoide.SqliteAsset
         {
             if (_openFlags.HasFlag(SQLiteOpenFlags.ReadWrite))
             {
-                Debug.LogWarning("SQLiteAsset does not support writing. Ignoring \"ReadWrite\" flag.", this);
+                Debug.LogWarning($"{nameof(SqliteAsset)} does not support writing to the database. Ignoring \"ReadWrite\" flag.", this);
                 _openFlags &= ~SQLiteOpenFlags.ReadWrite;
             }
             if (_openFlags.HasFlag(SQLiteOpenFlags.Create))
             {
-                Debug.LogWarning("SQLiteAsset does not support creating database. Ignoring \"Create\" flag.", this);
+                Debug.LogWarning($"{nameof(SqliteAsset)} does not support creating database. Ignoring \"Create\" flag.", this);
                 _openFlags &= ~SQLiteOpenFlags.Create;
             }
         }
