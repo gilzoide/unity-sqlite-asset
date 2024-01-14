@@ -56,7 +56,7 @@ namespace Gilzoide.SqliteAsset.Editor
                     {
                         EditorGUILayout.TextField("SQL", sql);
                         int count = db.ExecuteScalar<int>($"SELECT COUNT(*) FROM {SQLiteConnection.Quote(name)}");
-                        EditorGUILayout.IntField("Count", count);
+                        EditorGUILayout.IntField("Row Count", count);
                     }
                     EditorGUILayout.Space();
                 }
