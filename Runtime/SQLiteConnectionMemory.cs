@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using SQLite;
 using Unity.Collections.LowLevel.Unsafe;
 
-namespace Gilzoide.SqliteNet
+namespace Gilzoide.SqliteAsset
 {
     public unsafe class SQLiteConnectionMemory : SQLiteConnection
     {

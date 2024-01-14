@@ -2,11 +2,11 @@ using System;
 using SQLite;
 using UnityEngine;
 
-namespace Gilzoide.SqliteNet
+namespace Gilzoide.SqliteAsset
 {
     public class SqliteAsset : ScriptableObject
     {
-        [Tooltip("Flags controlling how the SQLite connection should be opened. 'ReadWrite' flag will be ignored, since SQLite assets are read-only.")]
+        [Tooltip("Flags controlling how the SQLite connection should be opened. 'ReadWrite' and 'Create' flags will be ignored, since SQLite assets are read-only.")]
         [SerializeField] internal SQLiteOpenFlags _openFlags = SQLiteOpenFlags.ReadOnly;
 
         [Tooltip("Whether to store DateTime properties as ticks (true) or strings (false).")]
@@ -23,7 +23,7 @@ namespace Gilzoide.SqliteNet
         public SQLiteOpenFlags OpenFlags
         {
             get => _openFlags;
-            set => _openFlags = value & ~SQLiteOpenFlags.ReadWrite;
+            set => _openFlags = value & ~(SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
         }
 
         /// <summary>
@@ -67,6 +67,11 @@ namespace Gilzoide.SqliteNet
             {
                 Debug.LogWarning("SQLiteAsset does not support writing. Ignoring \"ReadWrite\" flag.", this);
                 _openFlags &= ~SQLiteOpenFlags.ReadWrite;
+            }
+            if (_openFlags.HasFlag(SQLiteOpenFlags.Create))
+            {
+                Debug.LogWarning("SQLiteAsset does not support creating database. Ignoring \"Create\" flag.", this);
+                _openFlags &= ~SQLiteOpenFlags.Create;
             }
         }
 #endif
