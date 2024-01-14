@@ -50,7 +50,7 @@ namespace Gilzoide.SqliteAsset
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NullReferenceException">If <see cref="Bytes"/> is null.</exception>
-        public SQLiteConnectionMemory CreateConnection()
+        public SQLiteConnection CreateConnection()
         {
             if (_bytes == null)
             {
