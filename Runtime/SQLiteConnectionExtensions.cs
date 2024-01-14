@@ -31,8 +31,7 @@ namespace Gilzoide.SqliteAsset
             {
                 foreach (string field in CsvReader.ParseStream(csvStream, separator, maxFieldSize))
                 {
-                    // newline
-                    if (field == null)
+                    if (field == null)  // newline
                     {
                         string joinedColumns = string.Join(", ", columns);
                         if (parsingHeader)

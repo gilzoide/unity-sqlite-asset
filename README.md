@@ -27,3 +27,7 @@ Either:
   https://github.com/gilzoide/unity-sqlite-asset.git
   ```
 - Clone this repository or download a snapshot of it directly inside your project's `Assets` or `Packages` folder.
+
+
+## Credits
+- Database icons from [Solar Icons Set](https://www.figma.com/community/file/1166831539721848736/solar-icons-set), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
