@@ -64,9 +64,9 @@ namespace Gilzoide.SqliteAsset
         {
         }
 
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
+            base.Dispose(disposing);
             if (_memoryGcHandle != 0)
             {
                 UnsafeUtility.ReleaseGCObject(_memoryGcHandle);
