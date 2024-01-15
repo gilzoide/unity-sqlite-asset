@@ -5,7 +5,9 @@
         "Gilzoide.SqliteAsset",
         "Gilzoide.SqliteNet"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
