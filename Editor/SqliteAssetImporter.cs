@@ -13,10 +13,15 @@ namespace Gilzoide.SqliteAsset.Editor
     public class SqliteAssetImporter : ScriptedImporter
     {
         [Tooltip("Flags controlling how the SQLite connection should be opened. 'ReadWrite' and 'Create' flags will be ignored, since SQLite assets are read-only.")]
-        [SerializeField] internal SQLiteOpenFlags _openFlags = SQLiteOpenFlags.ReadOnly;
+        [SerializeField] private SQLiteOpenFlags _openFlags = SQLiteOpenFlags.ReadOnly;
 
         [Tooltip("Whether to store DateTime properties as ticks (true) or strings (false).")]
-        [SerializeField] internal bool _storeDateTimeAsTicks = true;
+        [SerializeField] private bool _storeDateTimeAsTicks = true;
+
+        [Tooltip("Name of the file created for the database inside Streaming Assets folder during builds.\n\n"
+            + "If empty, the database bytes will be stored in the asset itself.\n\n"
+            + "Loading databases from Streaming Assets is not supported in Android and WebGL platforms.")]
+        [SerializeField] private string _streamingAssetsPath;
 
         public override void OnImportAsset(AssetImportContext ctx)
         {
@@ -24,7 +29,8 @@ namespace Gilzoide.SqliteAsset.Editor
             asset.OpenFlags = _openFlags;
             asset.StoreDateTimeAsTicks = _storeDateTimeAsTicks;
             asset.Bytes = File.ReadAllBytes(ctx.assetPath);
-            ctx.AddObjectToAsset("main", asset);
+            asset.StreamingAssetsPath = _streamingAssetsPath;
+            ctx.AddObjectToAsset("sqlite", asset);
             ctx.SetMainObject(asset);
         }
     }
