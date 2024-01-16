@@ -17,10 +17,15 @@ namespace Gilzoide.SqliteAsset.Editor
         [SerializeField] private string _tableName = "data";
 
         [Tooltip("Flags controlling how the SQLite connection should be opened. 'ReadWrite' and 'Create' flags will be ignored, since SQLite assets are read-only.")]
-        [SerializeField] internal SQLiteOpenFlags _openFlags = SQLiteOpenFlags.ReadOnly;
+        [SerializeField] private SQLiteOpenFlags _openFlags = SQLiteOpenFlags.ReadOnly;
 
         [Tooltip("Whether to store DateTime properties as ticks (true) or strings (false).")]
-        [SerializeField] internal bool _storeDateTimeAsTicks = true;
+        [SerializeField] private bool _storeDateTimeAsTicks = true;
+
+        [Tooltip("Name of the file created for the database inside Streaming Assets folder during builds.\n\n"
+            + "If empty, the database bytes will be stored in the asset itself.\n\n"
+            + "Loading databases from Streaming Assets is not supported in Android and WebGL platforms.")]
+        [SerializeField] private string _streamingAssetsPath;
 
 
         [Header("CSV options")]
@@ -38,7 +43,7 @@ namespace Gilzoide.SqliteAsset.Editor
             using (var stream = new StreamReader(file))
             {
                 tempDb.ImportCsvToTable(_tableName, stream, _csvSeparator);
-                asset = tempDb.SerializeToAsset(_openFlags, _storeDateTimeAsTicks);
+                asset = tempDb.SerializeToAsset(_openFlags, _storeDateTimeAsTicks, _streamingAssetsPath);
             }
             ctx.AddObjectToAsset("sqlite", asset);
             ctx.SetMainObject(asset);
