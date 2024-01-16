@@ -13,11 +13,10 @@ Optionally, you can import ".csv" files as SQLite database assets.
   + CSV files may be optionally imported as SQLite database assets, just change the importer to `Gilzoide.SqliteAsset.Editor.SqliteAssetCsvImporter` in the Inspector.
   + SQLite assets may be loaded from Streaming Assets folder or from memory, depending on the value of the  property.
   + Loading databases from Streaming Assets is not supported in Android and WebGL platforms.
-- `SQLiteConnection.Serialize` extension method for serializing a database to `byte[]`.
+- `SQLiteConnection.Serialize` extension method for serializing a database to `byte[]` (Reference: [SQLite Serialization](https://www.sqlite.org/c3ref/serialize.html)).
 - `SQLiteConnection.SerializeToAsset` extension method for serializing a database to an instance of `SqliteAsset`.
+- `SQLiteConnection.Deserialize` extension method for deserializing memory (`byte[]`) into a SQLiteConnection (Reference: [SQLite Deserialization](https://www.sqlite.org/c3ref/deserialize.html)).
 - `SQLiteConnection.ImportCsvToTable` extension method for importing a CSV data stream as a new table inside the database.
-- [SQLiteConnectionMemory](Runtime/SQLiteConnectionMemory.cs): custom `SQLiteConnection` subclass that loads a SQLite database from memory (`byte[]`) instead of file.
-- Supported platforms: Windows, macOS, iOS, tvOS, visionOS, Android and WebGL
 
 
 ## Dependencies
