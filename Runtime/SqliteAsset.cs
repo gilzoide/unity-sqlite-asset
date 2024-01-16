@@ -57,7 +57,7 @@ namespace Gilzoide.SqliteAsset
                 throw new NullReferenceException(nameof(Bytes));
             }
 
-            return new SQLiteConnectionMemory(Bytes, OpenFlags, StoreDateTimeAsTicks);
+            return new SQLiteConnection("").Deserialize(Bytes, null, SQLiteConnectionExtensions.SQLITE_DESERIALIZE_READONLY);
         }
 
 #if UNITY_EDITOR
