@@ -29,5 +29,9 @@ Either:
 - Clone this repository or download a snapshot of it directly inside your project's `Assets` or `Packages` folder.
 
 
+## Related projects
+- [SQLite Asset - CSV](https://github.com/gilzoide/unity-sqlite-asset-csv): easily import ".csv" files as read-only SQLite database assets
+
+
 ## Credits
 - Database icons from [Solar Icons Set](https://www.figma.com/community/file/1166831539721848736/solar-icons-set), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
