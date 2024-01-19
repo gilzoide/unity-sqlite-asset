@@ -32,7 +32,7 @@ namespace Gilzoide.SqliteAsset
         );
 
         [DllImport(SQLite3.LibraryPath)]
-        private static extern void sqlite3_free(IntPtr extensionFun);
+        private static extern void sqlite3_free(IntPtr buffer);
 
         public static byte[] Serialize(this SQLiteConnection db, string schema = null)
         {
