@@ -26,6 +26,12 @@ namespace Gilzoide.SqliteAsset.Editor
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
+            EditorGUILayout.Space();
+
+            using (new EditorGUI.DisabledScope(true))
+            {
+                EditorGUILayout.TextField("Database size in bytes", EditorUtility.FormatBytes(((SqliteAsset) target).Bytes.Length));
+            }
 
             if (serializedObject.isEditingMultipleObjects)
             {
