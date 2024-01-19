@@ -1,12 +1,12 @@
 # SQLite Asset
 Read-only [SQLite](https://sqlite.org/) database assets for Unity.
 
-Automatically imports ".db", ".sqlite", ".sqlite2" and ".sqlite3" files as SQLite database assets.
+Automatically imports ".sqlite", ".sqlite2" and ".sqlite3" files as SQLite database assets.
 
 
 ## Features
 - [SqliteAsset](Runtime/SqliteAsset.cs): read-only SQLite database Unity assets.
-  + Files with the extensions ".db", ".sqlite", ".sqlite2" and ".sqlite3" will be loaded as SQLite database assets.
+  + Files with the extensions ".sqlite", ".sqlite2" and ".sqlite3" will be imported as SQLite database assets.
   + Use the `CreateConnection()` method for connecting to the database provided by the asset.
     Make sure to `Dispose()` of any connections you create.
   + SQLite assets may be loaded from Streaming Assets folder or from memory, depending on the value of the  property.

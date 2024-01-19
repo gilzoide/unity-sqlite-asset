@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Gilzoide.SqliteAsset.Editor
 {
-    [ScriptedImporter(0, new[] { "db", "sqlite", "sqlite2", "sqlite3" })]
+    [ScriptedImporter(0, new[] { "sqlite", "sqlite2", "sqlite3" })]
     public class SqliteAssetImporter : ScriptedImporter
     {
         [Tooltip("Flags controlling how the SQLite connection should be opened. 'ReadWrite' and 'Create' flags will be ignored, since SQLite assets are read-only.")]
