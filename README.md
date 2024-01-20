@@ -9,8 +9,8 @@ Automatically imports ".sqlite", ".sqlite2" and ".sqlite3" files as SQLite datab
   + Files with the extensions ".sqlite", ".sqlite2" and ".sqlite3" will be imported as SQLite database assets.
   + Use the `CreateConnection()` method for connecting to the database provided by the asset.
     Make sure to `Dispose()` of any connections you create.
-  + SQLite assets may be loaded from Streaming Assets folder or from memory, depending on the value of the  property.
-  + Loading databases from Streaming Assets is not supported in Android and WebGL platforms.
+  + SQLite assets may be loaded from Streaming Assets folder or from memory, depending on the value of their "Streaming Assets Path" property.
+  + **Warning**: Android and WebGL platforms don't support loading SQLite databases from Streaming Assets and will always load them in memory.
 - `SQLiteConnection.Serialize` extension method for serializing a database to `byte[]` (Reference: [SQLite Serialization](https://www.sqlite.org/c3ref/serialize.html)).
 - `SQLiteConnection.SerializeToAsset` extension method for serializing a database to an instance of `SqliteAsset`.
 - `SQLiteConnection.Deserialize` extension method for deserializing memory (`byte[]`) into a SQLiteConnection (Reference: [SQLite Deserialization](https://www.sqlite.org/c3ref/deserialize.html)).
