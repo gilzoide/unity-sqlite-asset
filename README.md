@@ -13,13 +13,15 @@ Automatically imports ".sqlite", ".sqlite2" and ".sqlite3" files as SQLite datab
     Make sure to `Dispose()` of any connections you create.
   + SQLite assets may be loaded from Streaming Assets folder or from memory, depending on the value of their "Streaming Assets Path" property.
   + **Warning**: Android and WebGL platforms don't support loading SQLite databases from Streaming Assets and will always load them in memory.
-- `SQLiteConnection.Serialize` extension method for serializing a database to `byte[]` (Reference: [SQLite Serialization](https://www.sqlite.org/c3ref/serialize.html)).
 - `SQLiteConnection.SerializeToAsset` extension method for serializing a database to an instance of `SqliteAsset`.
-- `SQLiteConnection.Deserialize` extension method for deserializing memory (`byte[]`) into a SQLiteConnection (Reference: [SQLite Deserialization](https://www.sqlite.org/c3ref/deserialize.html)).
 
 
 ## Dependencies
 - [SQLite-net](https://github.com/gilzoide/unity-sqlite-net): library for managing SQLite databases
+
+
+## Optional packages
+- [SQLite Asset - CSV](https://github.com/gilzoide/unity-sqlite-asset-csv): easily import ".csv" files as read-only SQLite database assets
 
 
 ## How to install
@@ -33,10 +35,6 @@ Either:
   https://github.com/gilzoide/unity-sqlite-asset.git
   ```
 - Clone this repository or download a snapshot of it directly inside your project's `Assets` or `Packages` folder.
-
-
-## Related projects
-- [SQLite Asset - CSV](https://github.com/gilzoide/unity-sqlite-asset-csv): easily import ".csv" files as read-only SQLite database assets
 
 
 ## Credits
