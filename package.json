@@ -9,7 +9,7 @@
     "name": "Gil Barbosa Reis"
   },
   "dependencies": {
-    "com.gilzoide.sqlite-net": "1.0.0-preview4"
+    "com.gilzoide.sqlite-net": "1.0.0-preview6"
   },
   "unity": "2017.3"
 }

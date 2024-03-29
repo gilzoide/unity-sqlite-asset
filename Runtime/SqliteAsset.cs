@@ -83,7 +83,7 @@ namespace Gilzoide.SqliteAsset
                 throw new NullReferenceException(nameof(Bytes));
             }
 
-            return new SQLiteConnection("").Deserialize(Bytes, null, SQLiteConnectionExtensions.SQLITE_DESERIALIZE_READONLY);
+            return new SQLiteConnection("").Deserialize(Bytes, null, SQLite3.DeserializeFlags.ReadOnly);
         }
 
 #if UNITY_EDITOR
