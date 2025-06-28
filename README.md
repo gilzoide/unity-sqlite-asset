@@ -1,6 +1,8 @@
 # SQLite Asset
 [![openupm](https://img.shields.io/npm/v/com.gilzoide.sqlite-asset?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.gilzoide.sqlite-asset/)
 
+> **Warning**: this package is deprecated, since SQLite-net incorporated the functionality of this package.
+
 Read-only [SQLite](https://sqlite.org/) database assets for Unity.
 
 Automatically imports ".sqlite", ".sqlite2" and ".sqlite3" files as SQLite database assets.
